@@ -311,7 +311,7 @@ function get_triangulation(x:number, y:number, z:number, voxel_grid:VoxelGrid){
 	return TRIANGULATIONS[idx]
 }
 
-function march_cube(x:number, y:number, z:number, voxel_grid:VoxelGrid, vertices:THREE.Vector3[]){
+function march_cube(x:number, y:number, z:number, voxel_grid:VoxelGrid, vertices:number[], chunkSize: number, chunkPosition: [number, number, number]){
 	const tri = get_triangulation(x, y, z, voxel_grid)
     
     for (let i = 0; i < tri.length; i++) {
@@ -326,7 +326,7 @@ function march_cube(x:number, y:number, z:number, voxel_grid:VoxelGrid, vertices
 		var pos_b = new THREE.Vector3(x+p1.x, y+p1.y, z+p1.z)
 		
 		var position = calculate_interpolation(pos_a, pos_b, voxel_grid)
-		vertices.push(position)
+		vertices.push(position.x, position.y, position.z)
     }	
 }
 

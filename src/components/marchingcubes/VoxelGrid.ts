@@ -1,17 +1,22 @@
 class VoxelGrid {
     
     data : Float32Array | null = null
-    resolution : number = 8
+    resolution : number
     constructor(resolution: number)
     {
         this.resolution = resolution
-        this.data = new Float32Array(resolution * resolution * resolution).fill(1)
+        this.data = new Float32Array(this.resolution * this.resolution * this.resolution).fill(1)
     }
 
     readVoxel(x: number, y: number, z: number)
     {
         if (this.data) {
-            return this.data[x + this.resolution * (y + this.resolution * z)]
+            const index = x + this.resolution * (y  + this.resolution * z)
+            if (index >= this.data.length || index < 0)
+            {
+                return 1
+            }
+            return this.data[x + this.resolution * (y  + this.resolution * z)]
         }
         return 1
     }
